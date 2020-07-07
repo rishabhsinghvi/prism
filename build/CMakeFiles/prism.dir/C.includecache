@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/allocators/prism_allocator_utils.h
+prism_common.h
+../include/allocators/prism_common.h
+
+../include/allocators/prism_frame_allocator.h
+prism_common.h
+../include/allocators/prism_common.h
+
+../include/math/prism_vec3f.h
+prism_common.h
+../include/math/prism_common.h
+
+../include/prism_common.h
+stdbool.h
+-
+stdint.h
+-
+stdlib.h
+-
+stdio.h
+-
+string.h
+-
+assert.h
+-
+math.h
+-
+
+/Users/rishabh/desktop/prism/src/prism_frame_allocator.c
+allocators/prism_frame_allocator.h
+/Users/rishabh/desktop/prism/src/allocators/prism_frame_allocator.h
+allocators/prism_allocator_utils.h
+/Users/rishabh/desktop/prism/src/allocators/prism_allocator_utils.h
+
+/Users/rishabh/desktop/prism/src/prism_vec3f.c
+math/prism_vec3f.h
+/Users/rishabh/desktop/prism/src/math/prism_vec3f.h
+
