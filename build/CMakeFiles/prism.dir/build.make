@@ -90,9 +90,22 @@ CMakeFiles/prism.dir/src/prism_frame_allocator.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/prism.dir/src/prism_frame_allocator.c.s"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/rishabh/desktop/prism/src/prism_frame_allocator.c -o CMakeFiles/prism.dir/src/prism_frame_allocator.c.s
 
+CMakeFiles/prism.dir/src/prism_timer.c.o: CMakeFiles/prism.dir/flags.make
+CMakeFiles/prism.dir/src/prism_timer.c.o: ../src/prism_timer.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/rishabh/desktop/prism/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/prism.dir/src/prism_timer.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/prism.dir/src/prism_timer.c.o   -c /Users/rishabh/desktop/prism/src/prism_timer.c
+
+CMakeFiles/prism.dir/src/prism_timer.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/prism.dir/src/prism_timer.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/rishabh/desktop/prism/src/prism_timer.c > CMakeFiles/prism.dir/src/prism_timer.c.i
+
+CMakeFiles/prism.dir/src/prism_timer.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/prism.dir/src/prism_timer.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/rishabh/desktop/prism/src/prism_timer.c -o CMakeFiles/prism.dir/src/prism_timer.c.s
+
 CMakeFiles/prism.dir/src/prism_vec3f.c.o: CMakeFiles/prism.dir/flags.make
 CMakeFiles/prism.dir/src/prism_vec3f.c.o: ../src/prism_vec3f.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/rishabh/desktop/prism/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/prism.dir/src/prism_vec3f.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/rishabh/desktop/prism/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/prism.dir/src/prism_vec3f.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/prism.dir/src/prism_vec3f.c.o   -c /Users/rishabh/desktop/prism/src/prism_vec3f.c
 
 CMakeFiles/prism.dir/src/prism_vec3f.c.i: cmake_force
@@ -106,16 +119,18 @@ CMakeFiles/prism.dir/src/prism_vec3f.c.s: cmake_force
 # Object files for target prism
 prism_OBJECTS = \
 "CMakeFiles/prism.dir/src/prism_frame_allocator.c.o" \
+"CMakeFiles/prism.dir/src/prism_timer.c.o" \
 "CMakeFiles/prism.dir/src/prism_vec3f.c.o"
 
 # External object files for target prism
 prism_EXTERNAL_OBJECTS =
 
 libprism.a: CMakeFiles/prism.dir/src/prism_frame_allocator.c.o
+libprism.a: CMakeFiles/prism.dir/src/prism_timer.c.o
 libprism.a: CMakeFiles/prism.dir/src/prism_vec3f.c.o
 libprism.a: CMakeFiles/prism.dir/build.make
 libprism.a: CMakeFiles/prism.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/rishabh/desktop/prism/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C static library libprism.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/rishabh/desktop/prism/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C static library libprism.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/prism.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/prism.dir/link.txt --verbose=$(VERBOSE)
 

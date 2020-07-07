@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
   "/Users/rishabh/desktop/prism/src/prism_frame_allocator.c" "/Users/rishabh/desktop/prism/build/CMakeFiles/prism.dir/src/prism_frame_allocator.c.o"
+  "/Users/rishabh/desktop/prism/src/prism_timer.c" "/Users/rishabh/desktop/prism/build/CMakeFiles/prism.dir/src/prism_timer.c.o"
   "/Users/rishabh/desktop/prism/src/prism_vec3f.c" "/Users/rishabh/desktop/prism/build/CMakeFiles/prism.dir/src/prism_vec3f.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")

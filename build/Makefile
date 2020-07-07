@@ -170,6 +170,33 @@ src/prism_frame_allocator.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/prism.dir/build.make CMakeFiles/prism.dir/src/prism_frame_allocator.c.s
 .PHONY : src/prism_frame_allocator.c.s
 
+src/prism_timer.o: src/prism_timer.c.o
+
+.PHONY : src/prism_timer.o
+
+# target to build an object file
+src/prism_timer.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/prism.dir/build.make CMakeFiles/prism.dir/src/prism_timer.c.o
+.PHONY : src/prism_timer.c.o
+
+src/prism_timer.i: src/prism_timer.c.i
+
+.PHONY : src/prism_timer.i
+
+# target to preprocess a source file
+src/prism_timer.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/prism.dir/build.make CMakeFiles/prism.dir/src/prism_timer.c.i
+.PHONY : src/prism_timer.c.i
+
+src/prism_timer.s: src/prism_timer.c.s
+
+.PHONY : src/prism_timer.s
+
+# target to generate assembly for a file
+src/prism_timer.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/prism.dir/build.make CMakeFiles/prism.dir/src/prism_timer.c.s
+.PHONY : src/prism_timer.c.s
+
 src/prism_vec3f.o: src/prism_vec3f.c.o
 
 .PHONY : src/prism_vec3f.o
@@ -209,6 +236,9 @@ help:
 	@echo "... src/prism_frame_allocator.o"
 	@echo "... src/prism_frame_allocator.i"
 	@echo "... src/prism_frame_allocator.s"
+	@echo "... src/prism_timer.o"
+	@echo "... src/prism_timer.i"
+	@echo "... src/prism_timer.s"
 	@echo "... src/prism_vec3f.o"
 	@echo "... src/prism_vec3f.i"
 	@echo "... src/prism_vec3f.s"

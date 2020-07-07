@@ -6,6 +6,10 @@ CMakeFiles/prism.dir/src/prism_frame_allocator.c.o: ../include/allocators/prism_
 CMakeFiles/prism.dir/src/prism_frame_allocator.c.o: ../include/prism_common.h
 CMakeFiles/prism.dir/src/prism_frame_allocator.c.o: ../src/prism_frame_allocator.c
 
+CMakeFiles/prism.dir/src/prism_timer.c.o: ../include/prism_common.h
+CMakeFiles/prism.dir/src/prism_timer.c.o: ../include/prism_timer.h
+CMakeFiles/prism.dir/src/prism_timer.c.o: ../src/prism_timer.c
+
 CMakeFiles/prism.dir/src/prism_vec3f.c.o: ../include/math/prism_vec3f.h
 CMakeFiles/prism.dir/src/prism_vec3f.c.o: ../include/prism_common.h
 CMakeFiles/prism.dir/src/prism_vec3f.c.o: ../src/prism_vec3f.c
