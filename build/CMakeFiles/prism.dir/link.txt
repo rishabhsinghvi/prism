@@ -1,2 +1,1 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc libprism.a  CMakeFiles/prism.dir/src/prism_frame_allocator.c.o CMakeFiles/prism.dir/src/prism_timer.c.o CMakeFiles/prism.dir/src/prism_vec3f.c.o
-/Library/Developer/CommandLineTools/usr/bin/ranlib libprism.a
+/Library/Developer/CommandLineTools/usr/bin/cc  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -dynamiclib -Wl,-headerpad_max_install_names  -o libprism.dylib -install_name @rpath/libprism.dylib CMakeFiles/prism.dir/src/prism_frame_allocator.c.o CMakeFiles/prism.dir/src/prism_timer.c.o CMakeFiles/prism.dir/src/prism_vec3f.c.o 

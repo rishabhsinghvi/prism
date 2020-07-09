@@ -6,6 +6,18 @@
 
 #IncludeRegexTransform: 
 
+../include/allocators/prism_allocator_utils.h
+prism_common.h
+../include/allocators/prism_common.h
+
+../include/allocators/prism_frame_allocator.h
+prism_common.h
+../include/allocators/prism_common.h
+
+../include/math/prism_vec3f.h
+prism_common.h
+../include/math/prism_common.h
+
 ../include/prism_common.h
 stdbool.h
 -
@@ -26,6 +38,12 @@ math.h
 prism_common.h
 ../include/prism_common.h
 
+/Users/rishabh/desktop/prism/src/prism_frame_allocator.c
+allocators/prism_frame_allocator.h
+/Users/rishabh/desktop/prism/src/allocators/prism_frame_allocator.h
+allocators/prism_allocator_utils.h
+/Users/rishabh/desktop/prism/src/allocators/prism_allocator_utils.h
+
 /Users/rishabh/desktop/prism/src/prism_timer.c
 prism_timer.h
 /Users/rishabh/desktop/prism/src/prism_timer.h
@@ -33,4 +51,10 @@ windows.h
 -
 sys/time.h
 -
+
+/Users/rishabh/desktop/prism/src/prism_vec3f.c
+prism_common.h
+/Users/rishabh/desktop/prism/src/prism_common.h
+math/prism_vec3f.h
+/Users/rishabh/desktop/prism/src/math/prism_vec3f.h
 

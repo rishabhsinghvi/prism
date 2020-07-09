@@ -26,30 +26,23 @@
 #include "allocators/prism_frame_allocator.h"
 #include "allocators/prism_allocator_utils.h"
 
-frame_allocator_t* frame_allocator_create(size_t arena_size)
+frame_allocator_t frame_allocator_create(size_t arena_size)
 {
-    frame_allocator_t* allocator = (frame_allocator_t*)PRISM_ALLOC(sizeof(frame_allocator_t));
-
-    if(!allocator)
-    {
-        PRISM_DEBUG_MSG("[ALLOCATION ERROR]: Unable to allocate frame allocator.\n");
-        return NULL;
-    } 
+    frame_allocator_t allocator;
 
     void* mem = PRISM_ALLOC(arena_size);
 
     if(!mem)
     {
         PRISM_DEBUG_MSG("[ALLOCATION ERROR]: Unable to allocate arena for frame allocator.\n");
-        PRISM_FREE(allocator);
-        return NULL;
+        /* TODO: Something more robust */
     }
 
-    allocator->arena = mem;
-    allocator->cur = mem;
-    allocator->arena_size = arena_size;
-    allocator->free_size = arena_size;
-    allocator->allocations = 0;
+    allocator.arena = mem;
+    allocator.cur = mem;
+    allocator.arena_size = arena_size;
+    allocator.free_size = arena_size;
+    allocator.allocations = 0;
     
     return allocator;
 }

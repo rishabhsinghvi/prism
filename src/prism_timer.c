@@ -38,19 +38,3 @@
 
 #endif
 
-timer_t prism_timer_create()
-{
-    timer_t timer;
-#if defined(PRISM_PLATFORM_WINDOWS)
-    LARGE_INTEGER freq;
-    QueryPerformanceFrequency(&freq);
-    LARGE_INTEGER start;
-    QueryPerformanceCounter(&start);
-    
-    timer.freq = freq.QuadPart;
-    timer.start = start.QuadPart;
-#elif defined(PRISM_PLATFORM_LINUX) || defined(PRISM_PLATFORM_APPLE)
-    
-
-
-}

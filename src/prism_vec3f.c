@@ -22,6 +22,7 @@
 * SOFTWARE.
 */
 
+#include "prism_common.h"
 #include "math/prism_vec3f.h"
 
 vec3f vec3f_create(f64 x, f64 y, f64 z)

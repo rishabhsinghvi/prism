@@ -208,7 +208,7 @@ CMAKE_STRIP:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/strip
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Build a shared library
-PRISM_BUILD_SHARED:BOOL=OFF
+PRISM_BUILD_SHARED:BOOL=ON
 
 //Value Computed by CMake
 prism_BINARY_DIR:STATIC=/Users/rishabh/desktop/prism/build

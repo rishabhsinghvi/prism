@@ -104,7 +104,7 @@ extern "C" {
 #endif
 
 /* NOTE: Should I use an absolute scale for comparison? What are the odds of it breaking? */
-inline bool float_equal(f64 x, f64 y)
+static inline bool float_equal(f64 x, f64 y)
 {
     return fabs(x - y) <= PRISM_EPS * (fabs(x) + fabs(y) + 1.0); 
 }

@@ -41,7 +41,7 @@ typedef struct
 } frame_allocator_t;
 
 
-PRISM_API frame_allocator_t* frame_allocator_create(size_t arena_size);
+PRISM_API frame_allocator_t frame_allocator_create(size_t arena_size);
 
 PRISM_API void* frame_allocator_allocate(frame_allocator_t* allocator, size_t allocation_size, size_t alignment);
 PRISM_API void frame_allocator_reset(frame_allocator_t* allocator);
