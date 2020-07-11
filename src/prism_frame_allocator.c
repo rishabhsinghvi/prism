@@ -22,76 +22,77 @@
 * SOFTWARE.
 */
 
-
 #include "allocators/prism_frame_allocator.h"
 #include "allocators/prism_allocator_utils.h"
 
-frame_allocator_t frame_allocator_create(size_t arena_size)
+prism_frame_allocator_t* prism_frame_allocator_create(size_t arena_size)
 {
-    frame_allocator_t allocator;
+    prism_frame_allocator_t* allocator = (prism_frame_allocator_t*)PRISM_ALLOC(sizeof(prism_frame_allocator_t));
+
+    if(!allocator)
+    {
+        PRISM_DEBUG_MSG("[ALLOCATOR ERROR]: Unable to allocate prism_frame_allocator_t.\n");
+        return NULL;
+    }
 
     void* mem = PRISM_ALLOC(arena_size);
 
     if(!mem)
     {
-        PRISM_DEBUG_MSG("[ALLOCATION ERROR]: Unable to allocate arena for frame allocator.\n");
-        /* TODO: Something more robust */
+        PRISM_DEBUG_MSG("[ALLOCATOR ERROR]: Unable to allocate arena for prism_frame_allocator_t. Size: %d\n", arena_size);
+        PRISM_FREE(allocator);
+        return NULL;
     }
 
-    allocator.arena = mem;
-    allocator.cur = mem;
-    allocator.arena_size = arena_size;
-    allocator.free_size = arena_size;
-    allocator.allocations = 0;
-    
+    allocator->allocator_type = ALLOCATOR_TYPE_FRAME;
+    allocator->arena_mem = mem;
+    allocator->arena_size = arena_size;
+    allocator->arean_cur = mem;
+    allocator->free_mem = arena_size;
+
     return allocator;
 }
 
-
-void* frame_allocator_allocate(frame_allocator_t* allocator, size_t allocation_size, size_t alignment)
+void prism_frame_allocator_delete(prism_frame_allocator_t* allocator)
 {
-    /* Make sure alignment is a power of 2 */
-    PRISM_ASSERT((alignment & (alignment - 1)) == 0);
+    if(!allocator || !allocator->arena_mem)
+        return;
 
-    if(!allocator)
+    PRISM_FREE(allocator->arena_mem);
+    PRISM_FREE(allocator);
+}
+
+
+void* prism_frame_allocator_allocate(prism_frame_allocator_t* allocator, size_t bytes, size_t alignment)
+{
+    if(!allocator || !allocator->arena_mem)
         return NULL;
+    
 
-    if(allocation_size > allocator->free_size)
+    void* return_ptr = prism_get_aligned_addr(allocator->arena_cur, alignment);
+
+    size_t adjustment = (uintptr_t)return_ptr - (uintptr_t)allocator->arena_cur;
+    size_t total_alloc_size = adjustment + bytes;
+
+    if(total_alloc_size > allocator->free_mem)
     {
-        PRISM_DEBUG_MSG("[ALLOCATION ERROR]: Requested allocation size exceeds arena size.\n");
+        PRISM_DEBUG_MSG("[ALLOCATOR ERROR]: Not enough memory to allocate.\n");
         return NULL;
     }
 
-    void* return_ptr = prism_get_aligned_addr(allocator->cur, alignment);
-    
-    /* TODO: We are recalculating misalignment here. Maybe return from aligned address calculation? */
-    size_t misalignment = (uintptr_t)return_ptr + (uintptr_t)allocator->cur;
-    size_t usage = misalignment + allocation_size;
-    
-    allocator->free_size -= usage;
-    allocator->allocations += 1;
-    
+    allocator->arena_cur = (void*)((uintptr_t)allocator->arena_cur + total_alloc_size);
+
     return return_ptr;
 }
 
-
-void frame_allocator_reset(frame_allocator_t* allocator)
+void prism_frame_allocator_reset(prism_frame_allocator_t* allocator)
 {
-    if(!allocator)
+    if(!allocator || !allocator->arena_mem)
         return;
     
-    allocator->cur = allocator->arena;
-    allocator->allocations = 0;
-    allocator->free_size = allocator->arena_size;
+    allocator->arena_cur = allcator->arena_mem;
+    allocator->free_mem = allocator->arena_mem;
 }
 
 
-void frame_allocator_delete(frame_allocator_t* allocator)
-{
-    if(!allocator)
-        return;
-    
-    PRISM_FREE(allocator->arena);
-    PRISM_FREE(allocator);
-    memset(allocator, 0, sizeof(frame_allocator_t));
-}
+
