@@ -33,6 +33,8 @@ void* prism_allocate(prism_base_allocator_t* allocator, size_t bytes, size_t ali
     {
         case ALLOCATOR_TYPE_FRAME:
             return prism_frame_allocator_allocate((prism_frame_allocator_t*)allocator, bytes, alignment);
+        case ALLOCATOR_TYPE_POOL:
+            return prism_pool_allocator_allocate(prism_pool_allocator_t*)allocator);
         
     }
 

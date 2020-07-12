@@ -100,9 +100,10 @@ void prism_pool_allocator_delete(prism_pool_allocator_t* allocator)
 
 void* prism_pool_allocator_allocate(prism_frame_allocator_t* allocator)
 {
-    if(!allocator || !allocator->arena_mem || free_pool_objects == 0)
+    if(!allocator || !allocator->arena_mem || allocator->free_pool_objects == 0)
         return NULL;
     
+    allocator->free_pool_objects -= 1;
     return prism_internal_allocate_single_node(allocator);
 }
 
@@ -111,5 +112,6 @@ void prism_frame_allocator_free(prism_frame_allocator_t* allocator, void* pool_o
     if(!prism_internal_bounds_check(allocator, object))
         return;
 
+    allocator->free_pool_objects += 1;
     prism_internal_free_single_node(allocator, pool_object);
 }

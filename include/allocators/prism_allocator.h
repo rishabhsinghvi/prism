@@ -22,18 +22,23 @@
 * SOFTWARE.
 */
 
-#ifndef PRISM_LINEAR_ALLOCATOR_H
-#define PRISM_LINEAR_ALLOCATOR_H
+#ifndef PRISM_ALLOCATOR_H
+#define PRISM_ALLOCATOR_H
 
 #include "prism_common.h"
+#include "allocators/prism_base_allocator.h"
+#include "allocators/prism_frame_allocator.h"
+#include "allocators/prism_pool_allocator.h"
 
-typedef struct
-{
-    void* arena;
-    size_t arena_size;
-    size_t free_size;
-    size_t allocations;
-} linear_allocator_t; 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+PRISM_API void* prism_allocate(prism_base_allocator_t* allocator, size_t bytes, size_t alignment);
+
+#ifdef __cplusplus
+}
+#endif
 
 
 #endif

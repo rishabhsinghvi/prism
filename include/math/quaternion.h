@@ -22,12 +22,11 @@
 * SOFTWARE.
 */
 
-#ifndef PRISM_FRAME_ALLOCATOR_H
-#define PRISM_FRAME_ALLOCATOR_H
+#ifndef PRISM_QUATERNION_H
+#define PRISM_QUATERNION_H
 
 #include "prism_common.h"
-#include "allocators/prism_base_allocator.h"
-
+#include "math/prism_vec3f.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,19 +34,16 @@ extern "C" {
 
 typedef struct
 {
-    prism_allocator_type allocator_type;
-    void* arena_mem;
-    size_t arena_size;
-    void* arena_cur;
-    size_t free_mem;
-} prism_frame_allocator_t;
+    vec3f vec;
+    f64 w;
+} quaternion_t;
 
-PRISM_API prism_frame_allocator_t* prism_frame_allocator_create(size_t arena_size);
-PRISM_API void prism_frame_allocator_delete(prism_frame_allocator_t* allocator);
+PRISM_API quaternion_t prism_quaternion_create_from_vec(const vec3f* vec, f64 w);
+PRISM_API quaternion_t prism_quaternion_create_from_scalar(f64 x, f64 y, f64 z, f64 w);
 
-PRISM_API void* prism_frame_allocator_allocate(prism_frame_allocator_t* allocator, size_t bytes, size_t alignment);
-PRISM_API void prism_frame_allocator_reset(prism_frame_allocator_t* allocator);
-    
+PRISM_API quaternion_t prism_quaternion_add(const quaternion_t* a, const quaternion_t* b);
+PRISM_API quaternion_t prism_quaternion_sub(const quaternion_t* a, const quaternion_t* b);
+PRISM_API quaternion_t prism_quaternion_mul(const quaternion_t* a, const quaternion_t* b);
 
 #ifdef __cplusplus
 }

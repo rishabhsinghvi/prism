@@ -22,10 +22,11 @@
 * SOFTWARE.
 */
 
-#ifndef PRISM_VEC3_INTEGER_H
-#define PRISM_VEC3_INTEGER_H
+#ifndef PRISM_VEC3F_H
+#define PRISM_VEC3F_H
 
 #include "prism_common.h"
+#include "allocators/prism_base_allocator.h"
 
 /*
  * TODO: Profile and use SIMD if needed 
@@ -46,26 +47,26 @@ typedef union
     f64 data[3];
 } vec3f;
 
-PRISM_API vec3f vec3f_create(f64 x, f64 y, f64 z);
+PRISM_API vec3f* vec3f_create(f64 x, f64 y, f64 z, prism_base_allocator_t* allocator);
 
-PRISM_API vec3f vec3f_add(const vec3f* a, const vec3f* b);
-PRISM_API vec3f vec3f_sub(const vec3f* a, const vec3f* b);
-PRISM_API vec3f vec3f_mul(const vec3f* a, const vec3f* b);
-PRISM_API vec3f vec3f_div(const vec3f* a, const vec3f* b);
+PRISM_API vec3f* vec3f_add(const vec3f* a, const vec3f* b, prism_base_allocator_t* allocator);
+PRISM_API vec3f* vec3f_sub(const vec3f* a, const vec3f* b, prism_base_allocator_t* allocator);
+PRISM_API vec3f* vec3f_mul(const vec3f* a, const vec3f* b, prism_base_allocator_t* allocator);
+PRISM_API vec3f* vec3f_div(const vec3f* a, const vec3f* b, prism_base_allocator_t* allocator);
 
-PRISM_API vec3f vec3f_add_scalar(const vec3f* vec, f64 val);
-PRISM_API vec3f vec3f_sub_scalar(const vec3f* vec, f64 val);
-PRISM_API vec3f vec3f_mul_scalar(const vec3f* vec, f64 val);
-PRISM_API vec3f vec3f_div_scalar(const vec3f* vec, f64 val);
+PRISM_API vec3f* vec3f_add_scalar(const vec3f* vec, f64 val, prism_base_allocator_t* allocator);
+PRISM_API vec3f* vec3f_sub_scalar(const vec3f* vec, f64 val, prism_base_allocator_t* allocator);
+PRISM_API vec3f* vec3f_mul_scalar(const vec3f* vec, f64 val, prism_base_allocator_t* allocator);
+PRISM_API vec3f* vec3f_div_scalar(const vec3f* vec, f64 val, prism_base_allocator_t* allocator);
 
 PRISM_API f64 vec3f_dot(const vec3f* a, const vec3f* b);
-PRISM_API vec3f vec3f_cross(const vec3f* a, const vec3f* b);
+PRISM_API vec3f* vec3f_cross(const vec3f* a, const vec3f* b, prism_base_allocator_t* allocator);
 
 PRISM_API f64 vec3f_mag_sq(const vec3f* vec);
 PRISM_API f64 vec3f_mag(const vec3f* vec);
 
 PRISM_API void vec3f_normalize(vec3f* vec);
-PRISM_API vec3f vec3f_normalized(const vec3f* vec);
+PRISM_API vec3f* vec3f_normalized(const vec3f* vec, prism_base_allocator_t* allocator);
 
 #ifdef __cplusplus
 }

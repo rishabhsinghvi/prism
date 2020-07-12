@@ -22,32 +22,27 @@
 * SOFTWARE.
 */
 
-#ifndef PRISM_FRAME_ALLOCATOR_H
-#define PRISM_FRAME_ALLOCATOR_H
+#ifndef PRISM_BASE_ALLOCATOR_H
+#define PRISM_BASE_ALLOCATOR_H
 
 #include "prism_common.h"
-#include "allocators/prism_base_allocator.h"
-
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+typedef enum
+{
+    ALLOCATOR_TYPE_LINEAR,
+    ALLOCATOR_TYPE_POOL,
+    ALLOCATOR_TYPE_FRAME
+} prism_allocator_type;
+
 typedef struct
 {
     prism_allocator_type allocator_type;
-    void* arena_mem;
-    size_t arena_size;
-    void* arena_cur;
-    size_t free_mem;
-} prism_frame_allocator_t;
+} prism_base_allocator_t;
 
-PRISM_API prism_frame_allocator_t* prism_frame_allocator_create(size_t arena_size);
-PRISM_API void prism_frame_allocator_delete(prism_frame_allocator_t* allocator);
-
-PRISM_API void* prism_frame_allocator_allocate(prism_frame_allocator_t* allocator, size_t bytes, size_t alignment);
-PRISM_API void prism_frame_allocator_reset(prism_frame_allocator_t* allocator);
-    
 
 #ifdef __cplusplus
 }
