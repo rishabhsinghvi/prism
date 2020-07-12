@@ -26,6 +26,7 @@
 #define PRISM_ALLOCATOR_UTILS_H
 
 #include "prism_common.h"
+#include "allocators/prism_base_allocator.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -34,16 +35,15 @@ extern "C" {
 typedef struct
 {
 #ifdef PRISM_PLATFORM_WINDOWS
-    i64 start;
-    i64 freq;
+    f64 start;
 #else
-
+    u64 start;
 #endif
-} timer_t;
+} prism_timer_t;
 
-PRISM_API timer_t prism_timer_create();
-PRISM_API void prism_timer_reset(timer_t* timer);
-PRISM_API f64 prism_timer_dt(timer_t* timer);
+PRISM_API prism_timer_t* prism_timer_create(prism_base_allocator_t* allocator);
+PRISM_API void prism_timer_reset(prism_timer_t* timer);
+PRISM_API f64 prism_timer_dt(prism_timer_t* timer);
 
 #ifdef __cplusplus
 }

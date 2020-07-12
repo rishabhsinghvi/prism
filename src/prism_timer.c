@@ -38,3 +38,52 @@
 
 #endif
 
+#ifdef PRISM_PLATFORM_WINDOWS
+static f64 prism_internal_win32_get_inv_freq()
+{
+    LARGE_INTEGER freq;
+    QueryPerformanceFrequency(&freq);
+    return 1000000.0/(f64)freq.QuadPart;
+}
+static f64 inv_freq = prism_internal_win32_get_inv_freq();
+#endif
+
+
+prism_timer_t* prism_timer_create(prism_base_allocator_t* allocator)
+{
+    prism_timer_t* timer = (prism_timer_t*)PRISM_ALLOCATE(allocator, prism_timer_t);
+    
+    if(!timer)
+    {
+        PRISM_DEBUG_MSG("[TIMER ERROR]: Unable to allocate prism_timer_t");
+        return NULL;
+    }
+
+    prism_timer_reset(timer);
+    return timer;
+}
+
+void prism_timer_reset(prism_timer_t* timer)
+{
+    #ifdef PRISM_PLATFORM_WINDOWS
+    LARGE_INTEGER counter;
+    QueryPerformanceCounter(&counter);
+    timer->start = (f64)counter.QuadPart;
+#else
+    timeval time;
+    gettimeofday(&time, 0);
+    timer->start = time.tv_usec;
+#endif
+}
+
+f64 prism_timer_dt(prism_timer_t* timer)
+{
+#ifdef PRISM_PLATFORM_WINDOWS
+    LARGE_INTEGER counter;
+    QueryPerformanceCounter(&counter);
+    f64 count = (f64)counter.QuadPart;
+    f64 dt = inv_freq * (count - timer->start);
+    return dt;
+#endif
+}
+
