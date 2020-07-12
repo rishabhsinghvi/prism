@@ -27,6 +27,7 @@
 
 #include "prism_common.h"
 #include "math/prism_vec3f.h"
+#include "allocators/prism_base_allocator.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -38,12 +39,19 @@ typedef struct
     f64 w;
 } quaternion_t;
 
-PRISM_API quaternion_t prism_quaternion_create_from_vec(const vec3f* vec, f64 w);
-PRISM_API quaternion_t prism_quaternion_create_from_scalar(f64 x, f64 y, f64 z, f64 w);
+PRISM_API quaternion_t* prism_quaternion_create_from_vec(const vec3f* vec, f64 w, prism_base_allocator_t* allocator);
+PRISM_API quaternion_t* prism_quaternion_create_from_scalar(f64 x, f64 y, f64 z, f64 w, prism_base_allocator_t* allocator);
 
-PRISM_API quaternion_t prism_quaternion_add(const quaternion_t* a, const quaternion_t* b);
-PRISM_API quaternion_t prism_quaternion_sub(const quaternion_t* a, const quaternion_t* b);
-PRISM_API quaternion_t prism_quaternion_mul(const quaternion_t* a, const quaternion_t* b);
+PRISM_API quaternion_t* prism_quaternion_add(const quaternion_t* a, const quaternion_t* b, prism_base_allocator_t* allocator);
+PRISM_API quaternion_t* prism_quaternion_sub(const quaternion_t* a, const quaternion_t* b, prism_base_allocator_t* allocator);
+PRISM_API quaternion_t* prism_quaternion_mul(const quaternion_t* a, const quaternion_t* b, prism_base_allocator_t* allocator);
+PRISM_API quaternion_t* prism_quaternion_div(const quaternion_t* a, const quaternion_t* b, prism_base_allocator_t* allocator);
+
+
+PRISM_API f64 prism_quaternion_mag(const quaternion_t* quat);
+PRISM_API f64 prism_quaternion_mag_sq(const quaternion_t* quat);
+PRISM_API quaternion_t* prism_quaternion_conjugate(const quaternion_t* quat, prism_base_allocator_t* allocator);
+
 
 #ifdef __cplusplus
 }

@@ -27,6 +27,7 @@
 
 #include "prism_common.h"
 #include "math/prism_vec3f.h"
+#include "allocators/prism_base_allocator.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -39,10 +40,10 @@ typedef struct
 } aabb_t;
 
 
-PRISM_API aabb_t* prism_aabb_create_from_vec(const vec3f* min, const vec3f* max);
-PRISM_API aabb_t* prism_aabb_create_from_scalar(f64 mix, f64 miy, f64 miz, f64 max, f64 may, f64 maz);
+PRISM_API aabb_t* prism_aabb_create_from_vec(const vec3f* min, const vec3f* max, prism_base_allocator_t* allocator);
+PRISM_API aabb_t* prism_aabb_create_from_scalar(f64 mix, f64 miy, f64 miz, f64 max, f64 may, f64 maz, prism_base_allocator_t* allocator);
 
-PRISM_API vec3f prism_aabb_center(const aabb_t* aabb);
+PRISM_API vec3f* prism_aabb_center(const aabb_t* aabb, prism_base_allocator_t* allocator);
 
 PRISM_API bool prism_aabb_contains_point(const aabb_t* aabb, const vec3f* point);
 PRISM_API bool prism_aabb_overlap(const aabb_t* a, const aabb_t* b);

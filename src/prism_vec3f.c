@@ -28,7 +28,7 @@
 
 vec3f* vec3f_create(f64 x, f64 y, f64 z, prism_base_allocator_t* allocator)
 {
-    vec3f* res = prism_allocate(allocator);
+    vec3f* res = (vec3f*)PRISM_ALLOCATE(allocator, vec3f);
     
     res->x = x;
     res->y = y;
@@ -39,7 +39,7 @@ vec3f* vec3f_create(f64 x, f64 y, f64 z, prism_base_allocator_t* allocator)
 
 vec3f* vec3f_add(const vec3f* a, const vec3f* b, prism_base_allocator_t* allocator)
 {
-    vec3f* res = prism_allocate(allocator);
+    vec3f* res = (vec3f*)PRISM_ALLOCATE(allocator, vec3f);
 
     res->x = a->x + b->x;
     res->y = a->y + b->y;
@@ -50,7 +50,7 @@ vec3f* vec3f_add(const vec3f* a, const vec3f* b, prism_base_allocator_t* allocat
 
 vec3f* vec3f_sub(const vec3f* a, const vec3f* b, prism_base_allocator_t* allocator)
 {
-    vec3f* res = prism_allocate(allocator);
+    vec3f* res = (vec3f*)PRISM_ALLOCATE(allocator, vec3f);
 
     res->x = a->x - b->x;
     res->y = a->y - b->y;
@@ -59,9 +59,9 @@ vec3f* vec3f_sub(const vec3f* a, const vec3f* b, prism_base_allocator_t* allocat
     return res;
 }
 
-vec3f vec3f_mul(const vec3f* a, const vec3f* b, prism_base_allocator_t* allocator)
+vec3f* vec3f_mul(const vec3f* a, const vec3f* b, prism_base_allocator_t* allocator)
 {
-    vec3f* res = prism_allocate(allocator);
+    vec3f* res = (vec3f*)PRISM_ALLOCATE(allocator, vec3f);
 
     res->x = a->x * b->x;
     res->y = a->y * b->y;
@@ -70,13 +70,13 @@ vec3f vec3f_mul(const vec3f* a, const vec3f* b, prism_base_allocator_t* allocato
     return res;
 }
 
-vec3f vec3f_div(const vec3f* a, const vec3f* b, prism_base_allocator_t* allocator)
+vec3f* vec3f_div(const vec3f* a, const vec3f* b, prism_base_allocator_t* allocator)
 {
     PRISM_ASSERT(float_equal(b->x, 0.0));
     PRISM_ASSERT(float_equal(b->y, 0.0));
     PRISM_ASSERT(float_equal(b->z, 0.0));
 
-    vec3f* res = prism_allocate(allocator);
+    vec3f* res = (vec3f*)PRISM_ALLOCATE(allocator, vec3f);
 
     res->x = a->x / b->x;
     res->y = a->y / b->y;
@@ -90,9 +90,9 @@ f64 vec3f_dot(const vec3f* a, const vec3f* b)
     return a->x * b->x + a->y * b->y + a->z * b->z;
 }
 
-vec3f vec3f_cross(const vec3f* a, const vec3f* b, prism_base_allocator_t* allocator)
+vec3f* vec3f_cross(const vec3f* a, const vec3f* b, prism_base_allocator_t* allocator)
 {
-    vec3f* res = prism_allocate(allocator);
+    vec3f* res = (vec3f*)PRISM_ALLOCATE(allocator, vec3f);
 
     res->x = (a->y * b->z - a->z * b->y);
     res->y = (a->z * b->x - a->x * b->z);
@@ -126,7 +126,7 @@ void vec3f_normalize(vec3f* vec)
 
 vec3f* vec3f_add_scalar(const vec3f* vec, f64 val, prism_base_allocator_t* allocator)
 {
-    vec3f* res = prism_allocate(allocator);
+    vec3f* res = (vec3f*)PRISM_ALLOCATE(allocator, vec3f);
 
     res->x = vec->x + val;
     res->y = vec->y + val;
@@ -137,7 +137,7 @@ vec3f* vec3f_add_scalar(const vec3f* vec, f64 val, prism_base_allocator_t* alloc
 
 vec3f* vec3f_sub_scalar(const vec3f* vec, f64 val, prism_base_allocator_t* allocator)
 {
-    vec3f* res = prism_allocate(allocator);
+    vec3f* res = (vec3f*)PRISM_ALLOCATE(allocator, vec3f);
 
     res->x = vec->x - val;
     res->y = vec->y - val;
@@ -147,7 +147,7 @@ vec3f* vec3f_sub_scalar(const vec3f* vec, f64 val, prism_base_allocator_t* alloc
 }
 vec3f* vec3f_mul_scalar(const vec3f* vec, f64 val, prism_base_allocator_t* allocator)
 {
-    vec3f* res = prism_allocate(allocator);
+    vec3f* res = (vec3f*)PRISM_ALLOCATE(allocator, vec3f);
 
     res->x = vec->x * val;
     res->y = vec->y * val;
@@ -160,7 +160,7 @@ vec3f* vec3f_div_scalar(const vec3f* vec, f64 val, prism_base_allocator_t* alloc
 {
     PRISM_ASSERT(!(float_equal(val, 0.0)));
 
-    vec3f* res = prism_allocate(allocator);
+    vec3f* res = (vec3f*)PRISM_ALLOCATE(allocator, vec3f);
 
     res->x = vec->x / val;
     res->y = vec->y / val;
@@ -171,7 +171,7 @@ vec3f* vec3f_div_scalar(const vec3f* vec, f64 val, prism_base_allocator_t* alloc
 
 vec3f* vec3f_normalized(const vec3f* vec, prism_base_allocator_t* allocator)
 {
-    vec3f* res = prism_allocate(allocator);
+    vec3f* res = (vec3f*)PRISM_ALLOCATE(allocator, vec3f);
     *res = *vec;
     vec3f_normalize(res);
     return res;

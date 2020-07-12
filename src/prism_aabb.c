@@ -25,10 +25,11 @@
 #include "prism_common.h"
 #include "math/prism_vec3f.h"
 #include "collision/prism_aabb.h"
+#include "allocators/prism_allocator.h"
 
-aabb_t* prism_aabb_create_from_vec(const vec3f* min, const vec3f* max)
+aabb_t* prism_aabb_create_from_vec(const vec3f* min, const vec3f* max, prism_base_allocator_t* allocator)
 {
-    aabb_t* aabb = (aabb_t*)PRISM_ALLOC(sizeof(aabb_t));
+    aabb_t* aabb = (aabb_t*)PRISM_ALLOCATE(allocator, aabb_t);
 
     if(!aabb)
     {
@@ -42,9 +43,9 @@ aabb_t* prism_aabb_create_from_vec(const vec3f* min, const vec3f* max)
     return aabb;
 }
 
-aabb_t* prism_aabb_create_from_scalar(f64 mix, f64 miy, f64 miz, f64 max, f64 may, f64 maz)
+aabb_t* prism_aabb_create_from_scalar(f64 mix, f64 miy, f64 miz, f64 max, f64 may, f64 maz, prism_base_allocator_t* allocator)
 {
-    aabb_t* aabb = (aabb_t*)PRISM_ALLOC(sizeof(aabb_t));
+    aabb_t* aabb = (aabb_t*)PRISM_ALLOCATE(allocator, aabb_t);
 
     if(!aabb)
     {
@@ -52,18 +53,25 @@ aabb_t* prism_aabb_create_from_scalar(f64 mix, f64 miy, f64 miz, f64 max, f64 ma
         return NULL;
     }
 
-    aabb->min = vec3f_create(mix, miy, miz);
-    aabb->max = vec3f_create(max, may, maz);
+    aabb->min.x = mix;
+    aabb->min.y = miy;
+    aabb->min.z = miz;
+
+    aabb->max.x = max;
+    aabb->max.y = may;
+    aabb->max.z = maz;
 
     return aabb;
 }
 
-vec3f prism_aabb_center(const aabb_t* aabb)
+vec3f* prism_aabb_center(const aabb_t* aabb, prism_base_allocator_t* allocator)
 {
-    vec3f res;
+    vec3f sum;
+    sum.x = aabb->min.x + aabb->max.x;
+    sum.y = aabb->min.y + aabb->max.y;
+    sum.z = aabb->min.z + aabb->max.z;
 
-    vec3f sum = vec3f_add(&aabb->min, &aabb->max);
-    res = vec3f_div_scalar(&sum, 2.0);
+    vec3f* res = vec3f_div_scalar(&sum, 2.0, allocator);
 
     return res;
 }
@@ -81,7 +89,7 @@ bool prism_aabb_contains_point(const aabb_t* aabb, const vec3f* point)
 bool prism_aabb_overlap(const aabb_t* a, const aabb_t* b)
 {
     const vec3f* amin = &a->min;
-    const vec3*f amax = &b->max;
+    const vec3f* amax = &b->max;
 
     const vec3f* bmin = &b->min;
     const vec3f* bmax = &b->max;

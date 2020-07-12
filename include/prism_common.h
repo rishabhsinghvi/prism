@@ -32,6 +32,7 @@
 #include<string.h>
 #include<assert.h>
 #include<math.h>
+#include<stdalign.h>
 
 #if defined(_WIN32) || defined(_WIN64)
     #define PRISM_PLATFORM_WINDOWS
@@ -113,7 +114,10 @@ static inline bool float_equal(f64 x, f64 y)
 }
 #endif
 
+// TODO: Change name
 #define PRISM_ALLOC(mem) malloc(mem)
 #define PRISM_FREE(mem) free(mem)
+
+#define PRISM_ALLOCATE(allocator, type) prism_allocate(allocator, sizeof(type), alignof(type))
 
 #endif

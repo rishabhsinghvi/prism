@@ -39,7 +39,7 @@ prism_frame_allocator_t* prism_frame_allocator_create(size_t arena_size)
 
     if(!mem)
     {
-        PRISM_DEBUG_MSG("[ALLOCATOR ERROR]: Unable to allocate arena for prism_frame_allocator_t. Size: %d\n", arena_size);
+        PRISM_DEBUG_MSG("[ALLOCATOR ERROR]: Unable to allocate arena for prism_frame_allocator_t. Size: %d\n", (int)arena_size);
         PRISM_FREE(allocator);
         return NULL;
     }
@@ -47,7 +47,7 @@ prism_frame_allocator_t* prism_frame_allocator_create(size_t arena_size)
     allocator->allocator_type = ALLOCATOR_TYPE_FRAME;
     allocator->arena_mem = mem;
     allocator->arena_size = arena_size;
-    allocator->arean_cur = mem;
+    allocator->arena_cur = mem;
     allocator->free_mem = arena_size;
 
     return allocator;
@@ -90,8 +90,8 @@ void prism_frame_allocator_reset(prism_frame_allocator_t* allocator)
     if(!allocator || !allocator->arena_mem)
         return;
     
-    allocator->arena_cur = allcator->arena_mem;
-    allocator->free_mem = allocator->arena_mem;
+    allocator->arena_cur = allocator->arena_mem;
+    allocator->free_mem = allocator->arena_size;
 }
 
 

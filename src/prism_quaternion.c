@@ -22,7 +22,6 @@
 * SOFTWARE.
 */
 
-#include "math/vec3f.h"
 #include "math/prism_quaternion.h"
 #include "allocators/prism_allocator.h"
 
@@ -30,7 +29,7 @@
 
 quaternion_t* prism_quaternion_create_from_vec(const vec3f* vec, f64 w, prism_base_allocator_t* allocator)
 {
-    quaternion_t* quat = prism_allocate(allocator);
+    quaternion_t* quat = (quaternion_t*)PRISM_ALLOCATE(allocator, quaternion_t);
     quat->vec = *vec;
     quat->w = w;
     return quat;
@@ -38,7 +37,7 @@ quaternion_t* prism_quaternion_create_from_vec(const vec3f* vec, f64 w, prism_ba
 
 quaternion_t* prism_quaternion_create_from_scalar(f64 x, f64 y, f64 z, f64 w, prism_base_allocator_t* allocator)
 {
-    quaternion_t* quat = prism_allocate(allocator);
+    quaternion_t* quat = (quaternion_t*)PRISM_ALLOCATE(allocator, quaternion_t);
     quat->vec.x = x;
     quat->vec.y = y;
     quat->vec.z = z;
@@ -49,7 +48,7 @@ quaternion_t* prism_quaternion_create_from_scalar(f64 x, f64 y, f64 z, f64 w, pr
 
 quaternion_t* prism_quaternion_add(const quaternion_t* a, const quaternion_t* b, prism_base_allocator_t* allocator)
 {
-    quaternion_t* quat = (quaternion_t*)prism_allocate(allocator);
+    quaternion_t* quat = (quaternion_t*)PRISM_ALLOCATE(allocator, quaternion_t);
 
     quat->vec.x = a->vec.x + b->vec.x;
     quat->vec.y = a->vec.y + b->vec.y;
@@ -61,7 +60,7 @@ quaternion_t* prism_quaternion_add(const quaternion_t* a, const quaternion_t* b,
 
 quaternion_t* prism_quaternion_sub(const quaternion_t* a, const quaternion_t* b, prism_base_allocator_t* allocator)
 {
-    quaternion_t* quat = (quaternion_t*)prism_allocate(allocator);
+    quaternion_t* quat = (quaternion_t*)PRISM_ALLOCATE(allocator, quaternion_t);
 
     quat->vec.x = a->vec.x - b->vec.x;
     quat->vec.y = a->vec.y - b->vec.y;
@@ -73,7 +72,7 @@ quaternion_t* prism_quaternion_sub(const quaternion_t* a, const quaternion_t* b,
 
 quaternion_t* prism_quaternion_mul(const quaternion_t* a, const quaternion_t* b, prism_base_allocator_t* allocator)
 {
-    quaternion_t* quat = (quaternion_t*)prism_allocate(allocator);
+    quaternion_t* quat = (quaternion_t*)PRISM_ALLOCATE(allocator, quaternion_t);
 
     quat->w = (a->w * b->w) - (a->vec.x * b->vec.x) - (a->vec.y * b->vec.y) + (a->vec.z * b->vec.z);
     quat->vec.x = (a->w * b->vec.x) + (a->vec.x * b->w) - (a->vec.y * b->vec.z) + (a->vec.z * b->vec.y);
@@ -83,12 +82,12 @@ quaternion_t* prism_quaternion_mul(const quaternion_t* a, const quaternion_t* b,
     return quat;
 }
 
-quaternion_t* prism_quaternion_div(cosnt quaternion_t* a, const quaternion_t* b, prism_base_allocator_t* allocator)
+quaternion_t* prism_quaternion_div(const quaternion_t* a, const quaternion_t* b, prism_base_allocator_t* allocator)
 {
     f64 mag = prism_quaternion_mag_sq(b);
     PRISM_ASSERT(!float_equal(mag, 0.0));
 
-    quaternion_t* quat = (quaternion_t*)prism_allocate(allocator);
+    quaternion_t* quat = (quaternion_t*)PRISM_ALLOCATE(allocator, quaternion_t);
     
     quat->w = ((a->w * b->w) + (a->vec.x * b->vec.x) + (a->vec.y * b->vec.y) + (a->vec.z * b->vec.z)) / mag;
     quat->vec.x = ((a->w * b->vec.x) - (a->vec.x * b->w) - (a->vec.y * b->vec.z) + (a->vec.z * b->vec.y)) / mag;
@@ -115,7 +114,7 @@ f64 prism_quaternion_mag_sq(const quaternion_t* quat)
 
 quaternion_t* prism_quaternion_conjugate(const quaternion_t* quat, prism_base_allocator_t* allocator)
 {
-    quaternion_t* res = (quaternion_t*)prism_allocate(allocator);
+    quaternion_t* res = (quaternion_t*)PRISM_ALLOCATE(allocator, quaternion_t);
 
     res->vec.x = -quat->vec.x;
     res->vec.y = -quat->vec.y;

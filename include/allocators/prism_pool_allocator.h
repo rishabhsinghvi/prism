@@ -47,8 +47,8 @@ typedef struct
 PRISM_API prism_pool_allocator_t* prism_pool_allocator_create(size_t object_size, size_t max_pool_size);
 PRISM_API void prism_pool_allocator_delete(prism_pool_allocator_t* allocator);
 
-PRISM_API void* prism_pool_allocator_allocate(prism_frame_allocator_t* allocator);
-PRISM_API void* prism_frame_allocator_free(prism_frame_allocator_t* allocator, void* pool_object);
+PRISM_API void* prism_pool_allocator_allocate(prism_pool_allocator_t* allocator);
+PRISM_API void prism_frame_allocator_free(prism_pool_allocator_t* allocator, void* pool_object);
 
 #ifdef __cplusplus
 }
