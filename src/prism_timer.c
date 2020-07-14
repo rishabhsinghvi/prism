@@ -23,6 +23,7 @@
 */
 
 #include "prism_timer.h"
+#include "allocators/prism_allocator.h"
 
 #if defined(PRISM_PLATFORM_WINDOWS)
 
@@ -55,7 +56,7 @@ prism_timer_t* prism_timer_create(prism_base_allocator_t* allocator)
     
     if(!timer)
     {
-        PRISM_DEBUG_MSG("[TIMER ERROR]: Unable to allocate prism_timer_t");
+        PRISM_DEBUG_MSG("[ALLOCATION ERROR]: Unable to allocate prism_timer_t");
         return NULL;
     }
 
@@ -70,7 +71,7 @@ void prism_timer_reset(prism_timer_t* timer)
     QueryPerformanceCounter(&counter);
     timer->start = (f64)counter.QuadPart;
 #else
-    timeval time;
+    struct timeval time;
     gettimeofday(&time, 0);
     timer->start = time.tv_usec;
 #endif
@@ -84,6 +85,11 @@ f64 prism_timer_dt(prism_timer_t* timer)
     f64 count = (f64)counter.QuadPart;
     f64 dt = inv_freq * (count - timer->start);
     return dt;
+#else
+    struct timeval time;
+    gettimeofday(&time, 0);
+    u64 end = time.tv_usec;
+    return (f64)(end - timer->start) * 1E-6;
 #endif
 }
 
