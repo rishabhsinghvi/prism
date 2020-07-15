@@ -22,27 +22,45 @@
 * SOFTWARE.
 */
 
-#ifndef PRISM_TRIANGLE_H
-#define PRISM_TRIANGLE_H
+#ifndef PRISM_MAT33_H
+#define PRISM_MAT33_H
 
 #include "prism_common.h"
-#include "shapes/prism_base_shape.h"
-#include "math/prism_vec3f.h"
 #include "allocators/prism_base_allocator.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef struct 
+/* Matrices are stored in a column-major orientation */
+typedef union 
 {
-    prism_shape_type shape_type;
-} prism_triangle_t;
+    struct
+    {
+        f64 _00;
+        f64 _10;
+        f64 _20;
 
-PRISM_API prism_triangle_t* prism_triangle_create(prism_base_allocator_t* allocator);
+        f64 _01;
+        f64 _11;
+        f64 _21;
+
+        f64 _02;
+        f64 _12;
+        f64 _22;
+    };
+    f64 data[9];
+} mat33;
+
+PRISM_API mat33* prism_mat33_create(f64, f64, f64, f64, f64, f64, f64, f64, f64, prism_base_allocator_t* allocator);
+
+
+
+
 
 #ifdef __cplusplus
 }
 #endif
+
 
 #endif

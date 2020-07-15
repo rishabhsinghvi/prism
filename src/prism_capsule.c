@@ -22,27 +22,22 @@
 * SOFTWARE.
 */
 
-#ifndef PRISM_TRIANGLE_H
-#define PRISM_TRIANGLE_H
+#include "shapes/prism_capsule.h"
+#include "allocators/prism_allocator.h"
 
-#include "prism_common.h"
-#include "shapes/prism_base_shape.h"
-#include "math/prism_vec3f.h"
-#include "allocators/prism_base_allocator.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-typedef struct 
+prism_capsule_t* prism_capsule_create(f64 radius, f64 length, prism_base_allocator_t* allocator)
 {
-    prism_shape_type shape_type;
-} prism_triangle_t;
+    prism_capsule_t* capsule = (prism_capsule_t*)PRISM_ALLOCATE(allocator, prism_capsule_t);
+    
+    if(!capsule)
+    {
+        PRISM_DEBUG_MSG("[ALLOCATION ERROR]: Unable to allocate prism_capsule_t.\n");
+        return NULL;
+    }
 
-PRISM_API prism_triangle_t* prism_triangle_create(prism_base_allocator_t* allocator);
-
-#ifdef __cplusplus
+    capsule->radius = radius;
+    capsule->length = length;
+    
+    return capsule;
 }
-#endif
 
-#endif
