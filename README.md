@@ -1,3 +1,3 @@
 ## Prism
 
-![Prism](docs/img/prism-512.png?raw=true "Prism")
+![Prism](docs/img/prism.png?raw=true "Prism")
