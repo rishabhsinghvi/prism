@@ -177,3 +177,34 @@ vec3f* vec3f_normalized(const vec3f* vec, prism_base_allocator_t* allocator)
     return res;
 }
 
+void vec3f_update_add_scalar(vec3f* vec, f64 val)
+{
+    vec->x += val;
+    vec->y += val;
+    vec->z += val;
+}
+
+void vec3f_update_sub_scalar(vec3f* vec, f64 val)
+{
+    vec->x -= val;
+    vec->y -= val;
+    vec->z -= val;
+}
+
+void vec3f_update_mul_scalar(vec3f* vec, f64 val)
+{
+    vec->x *= val;
+    vec->y *= val;
+    vec->z *= val;
+}
+
+void vec3f_update_div_scalar(vec3f* vec, f64 val)
+{
+    PRISM_ASSERT(!float_equal(val, 0.0));
+    
+    vec->x /= val;
+    vec->y /= val;
+    vec->z /= val;
+}
+
+

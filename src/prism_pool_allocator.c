@@ -31,6 +31,7 @@ struct pool_internal_node_t
 
 static void prism_internal_build_pool_representation(prism_pool_allocator_t* allocator)
 {
+    size_t max_objects = allocator->max_pool_objects;
     // TODO
 }
 

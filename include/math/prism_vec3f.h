@@ -54,6 +54,10 @@ PRISM_API vec3f* vec3f_sub(const vec3f* a, const vec3f* b, prism_base_allocator_
 PRISM_API vec3f* vec3f_mul(const vec3f* a, const vec3f* b, prism_base_allocator_t* allocator);
 PRISM_API vec3f* vec3f_div(const vec3f* a, const vec3f* b, prism_base_allocator_t* allocator);
 
+
+PRISM_API void vec3f_update_add_scalar(vec3f* vec, f64 val);
+
+
 PRISM_API vec3f* vec3f_add_scalar(const vec3f* vec, f64 val, prism_base_allocator_t* allocator);
 PRISM_API vec3f* vec3f_sub_scalar(const vec3f* vec, f64 val, prism_base_allocator_t* allocator);
 PRISM_API vec3f* vec3f_mul_scalar(const vec3f* vec, f64 val, prism_base_allocator_t* allocator);

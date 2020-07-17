@@ -22,29 +22,16 @@
 * SOFTWARE.
 */
 
-#ifndef PRISM_TRIANGLE_H
-#define PRISM_TRIANGLE_H
+#include "prism_world_config.h"
 
-#include "prism_common.h"
-#include "shapes/prism_base_shape.h"
-#include "math/prism_vec3f.h"
-#include "allocators/prism_base_allocator.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-typedef struct 
+prism_world_config_t* prism_world_config_create(prism_base_allocator_t* allocator)
 {
-    prism_shape_type shape_type;
-    vec3f vertices[3];
-} prism_triangle_t;
+    prism_world_config_t* config = (prism_world_config_t*)PRISM_ALLOCATE(allocator, prism_world_config_t);
 
-PRISM_API prism_triangle_t* prism_triangle_create_from_vec(const vec3f* one, const vec3f* two, const vec3f* three, prism_base_allocator_t* allocator);
+    if(!config)
+    {
+        PRISM_DEBUG_MSG("[ALLOCATION ERROR]: Unable to allocate prism_world_config_t.\n");
+    }
 
-
-#ifdef __cplusplus
+    return config;
 }
-#endif
-
-#endif

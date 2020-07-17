@@ -27,6 +27,7 @@
 
 #include "prism_common.h"
 #include "math/prism_vec3f.h"
+#include "allocators/prism_base_allocator.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,11 +36,10 @@ extern "C" {
 typedef struct
 {
     /* Sets world gravity */
-    vec3f* gravity;
+    vec3f gravity;
 } prism_world_config_t;
 
-
-
+PRISM_API prism_world_config_t* prism_world_config_create(prism_base_allocator_t* allocator);
 
 #ifdef __cplusplus
 }
