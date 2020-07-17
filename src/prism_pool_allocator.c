@@ -32,7 +32,15 @@ struct pool_internal_node_t
 static void prism_internal_build_pool_representation(prism_pool_allocator_t* allocator)
 {
     size_t max_objects = allocator->max_pool_objects;
-    // TODO
+    pool_internal_node_t* head = (pool_internal_node_t*)allocator->arena_mem;
+    pool_internal_node_t* cur = head;
+
+    for(size_t i = 0; i < max_objects; i++)
+    {
+        pool_internal_node_t* end = (pool_internal_node_t*)((uintptr_t)cur + allocator->pool_object_size);
+        cur->next = end;
+        cur = end;
+    }
 }
 
 static void* prism_internal_allocate_single_node(prism_pool_allocator_t* allocator)
