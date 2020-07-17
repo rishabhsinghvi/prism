@@ -33,9 +33,17 @@ void* prism_allocate(prism_base_allocator_t* allocator, size_t bytes, size_t ali
     {
         case ALLOCATOR_TYPE_FRAME:
             return prism_frame_allocator_allocate((prism_frame_allocator_t*)allocator, bytes, alignment);
-        case ALLOCATOR_TYPE_POOL:
-            return prism_pool_allocator_allocate((prism_pool_allocator_t*)allocator);
         
+        case ALLOCATOR_TYPE_POOL:    
+        {  
+            prism_pool_allocator_t* pool_allocator = (prism_pool_allocator_t*)allocator;
+            PRISM_ASSERT(bytes == pool_allocator->pool_object_size);
+            return prism_pool_allocator_allocate(pool_allocator);
+        }
+
+        case ALLOCATOR_TYPE_LINEAR:
+        default:
+            PRISM_UNREACHABLE;
     }
 
     PRISM_UNREACHABLE;

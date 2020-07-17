@@ -23,6 +23,7 @@
 */
 
 #include "prism_world_config.h"
+#include "allocators/prism_allocator.h"
 
 prism_world_config_t* prism_world_config_create(prism_base_allocator_t* allocator)
 {
