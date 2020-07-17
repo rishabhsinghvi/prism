@@ -56,7 +56,7 @@ static bool prism_internal_bounds_check(prism_pool_allocator_t* allocator, void*
     return object >= allocator->arena_mem && object < arena_end;
 }
 
-void prism_internal_free_single_node(prism_pool_allocator_t* allocator, void* object)
+static void prism_internal_free_single_node(prism_pool_allocator_t* allocator, void* object)
 {
     pool_internal_node_t* new_node = (pool_internal_node_t*)object;
     new_node->next = allocator->node_head;
@@ -118,6 +118,7 @@ void* prism_pool_allocator_allocate(prism_pool_allocator_t* allocator)
 
 void prism_frame_allocator_free(prism_pool_allocator_t* allocator, void* pool_object)
 {
+    /* Check if object actually belongs to the pool */
     if(!prism_internal_bounds_check(allocator, pool_object))
         return;
 
