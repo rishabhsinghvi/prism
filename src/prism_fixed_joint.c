@@ -22,37 +22,24 @@
 * SOFTWARE.
 */
 
+#include "constraints/prism_fixed_joint.h"
+#include "allocators/prism_allocator.h"
 
-#ifndef PRISM_BODY_H
-#define PRISM_BODY_H
-
-#include "prism_common.h"
-#include "math/prism_math.h"
-#include "allocators/prism_base_allocator.h"
-
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-typedef enum
+prism_fixed_joint_t* prism_fixed_joint_create(u32 joint_id, prism_body_t* body1, prism_body_t* body2, vec3f* anchor_point, prism_base_allocator_t* allocator)
 {
-    BODY_TYPE_DYNAMIC,
-    BODY_TYPE_STATIC,
-    BODY_TYPE_KINEMATIC
-} prism_body_type;
+    prism_fixed_joint_t* joint = (prism_fixed_joint_t*)PRISM_ALLOCATE(allocator, prism_fixed_joint_t);
 
-typedef struct 
-{
-    prism_body_type body_type;
-    bool is_sleeping;
-    
-} prism_body_t;
+    if(!joint)
+    {
+        PRISM_DEBUG_MSG("[ALLOCATION ERROR]: Unable to allocate prism_fixed_joint_t.\n");
+        return NULL;
+    }
 
+    joint->joint_id = joint_id;
+    joint->body1 = body1;
+    joint->body2 = body2;
+    joint->anchor_point = anchor_point;
+    joint->type = PRISM_JOINT_BALL_AND_SOCKET;
 
-
-#ifdef __cplusplus
+    return joint;
 }
-#endif
-
-#endif

@@ -37,9 +37,15 @@ typedef struct
 {
     /* Sets world gravity */
     vec3f gravity;
+
+    /* Linear allocator size */
+    u32 linear_allocator_size;
+
+    /* single frame allocator size */
+    u32 frame_allocator_size;
 } prism_world_config_t;
 
-PRISM_API prism_world_config_t* prism_world_config_create(prism_base_allocator_t* allocator);
+PRISM_API prism_world_config_t* prism_world_config_create(const vec3f* gravity);
 
 #ifdef __cplusplus
 }

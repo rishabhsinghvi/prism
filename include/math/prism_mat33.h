@@ -53,10 +53,10 @@ typedef union
 } mat33;
 
 PRISM_API mat33* prism_mat33_create(f64, f64, f64, f64, f64, f64, f64, f64, f64, prism_base_allocator_t* allocator);
+PRISM_API mat33* prism_mat33_create_from_array(f64* array, prism_base_allocator_t* allocator);
 
-
-
-
+PRISM_API mat33* prism_mat33_add(const mat33* a, const mat33* b, prism_base_allocator_t* allocator);
+PRISM_API mat33* prism_mat33_sub(const mat33* a, const mat33* b, prism_base_allocator_t* allocator);
 
 #ifdef __cplusplus
 }

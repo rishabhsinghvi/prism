@@ -23,13 +23,11 @@
 */
 
 
-#ifndef PRISM_BODY_H
-#define PRISM_BODY_H
+#ifndef PRISM_BASE_JOINT_H
+#define PRISM_BASE_JOINT_H
 
 #include "prism_common.h"
-#include "math/prism_math.h"
-#include "allocators/prism_base_allocator.h"
-
+#include "body/prism_body.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -37,18 +35,19 @@ extern "C" {
 
 typedef enum
 {
-    BODY_TYPE_DYNAMIC,
-    BODY_TYPE_STATIC,
-    BODY_TYPE_KINEMATIC
-} prism_body_type;
+    PRISM_JOINT_FIXED,
+    PRISM_JOINT_BALL_AND_SOCKET,
+    PRISM_JOINT_HINGE,
+    PRISM_JOINT_SLIDER
+} prism_joint_type;
 
-typedef struct 
+typedef struct
 {
-    prism_body_type body_type;
-    bool is_sleeping;
-    
-} prism_body_t;
-
+    prism_joint_type type;
+    prism_body_t* body1;
+    prism_body_t* body2;
+    u32 joint_id;
+} prism_base_joint_t;
 
 
 #ifdef __cplusplus

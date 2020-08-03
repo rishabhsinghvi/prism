@@ -25,14 +25,22 @@
 #include "prism_world_config.h"
 #include "allocators/prism_allocator.h"
 
-prism_world_config_t* prism_world_config_create(prism_base_allocator_t* allocator)
+#define PRISM_DEFAULT_LINEAR_ALLOCATOR_SIZE 1024 * 1024
+#define PRISM_DEFAULT_FRAME_ALLOCATOR_SIZE 1024
+
+
+prism_world_config_t* prism_world_config_create(const vec3f* gravity)
 {
-    prism_world_config_t* config = (prism_world_config_t*)PRISM_ALLOCATE(allocator, prism_world_config_t);
+    prism_world_config_t* config = (prism_world_config_t*)PRISM_ALLOC(sizeof(prism_world_config_t));
 
     if(!config)
     {
         PRISM_DEBUG_MSG("[ALLOCATION ERROR]: Unable to allocate prism_world_config_t.\n");
     }
+
+    config->gravity = *gravity;
+    config->linear_allocator_size = PRISM_DEFAULT_LINEAR_ALLOCATOR_SIZE;
+    config->frame_allocator_size = PRISM_DEFAULT_FRAME_ALLOCATOR_SIZE;
 
     return config;
 }

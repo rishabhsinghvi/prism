@@ -23,36 +23,10 @@
 */
 
 
-#ifndef PRISM_BODY_H
-#define PRISM_BODY_H
-
-#include "prism_common.h"
-#include "math/prism_math.h"
+#include "collision/broadphase/prism_dynamic_aabb_tree.h"
 #include "allocators/prism_base_allocator.h"
 
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-typedef enum
+prism_dyn_aabb_tree_t* prism_dyn_aabb_tree_create(prism_base_allocator_t* allocator)
 {
-    BODY_TYPE_DYNAMIC,
-    BODY_TYPE_STATIC,
-    BODY_TYPE_KINEMATIC
-} prism_body_type;
-
-typedef struct 
-{
-    prism_body_type body_type;
-    bool is_sleeping;
     
-} prism_body_t;
-
-
-
-#ifdef __cplusplus
 }
-#endif
-
-#endif
