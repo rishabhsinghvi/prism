@@ -22,27 +22,23 @@
 * SOFTWARE.
 */
 
-#ifndef PRISM_WORLD_CONFIG_H
-#define PRISM_WORLD_CONFIG_H
+#ifndef PRISM_TRANSFORM_H
+#define PRISM_TRANSFORM_H
 
 #include "prism_common.h"
 #include "math/prism_vec3f.h"
-#include "allocators/prism_base_allocator.h"
+#include "math/prism_mat33.h"
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"{
 #endif
 
 typedef struct
 {
-    /* Linear allocator size */
-    u32 linear_allocator_size;
+    vec3f position;
+    mat33 rotation;
+} transform_t;
 
-    /* single frame allocator size */
-    u32 frame_allocator_size;
-} prism_world_config_t;
-
-PRISM_API prism_world_config_t* prism_world_config_create(const vec3f* gravity);
 
 #ifdef __cplusplus
 }

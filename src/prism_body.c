@@ -22,30 +22,39 @@
 * SOFTWARE.
 */
 
-#ifndef PRISM_WORLD_CONFIG_H
-#define PRISM_WORLD_CONFIG_H
+#include "body/prism_body.h"
+#include "allocators/prism_allocator.h"
 
-#include "prism_common.h"
-#include "math/prism_vec3f.h"
-#include "allocators/prism_base_allocator.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-typedef struct
+prism_body_t* prism_body_create(prism_body_type type, prism_base_allocator_t* allocator)
 {
-    /* Linear allocator size */
-    u32 linear_allocator_size;
+    prism_body_t* body = (prism_body_t*)PRISM_ALLOCATE(allocator, prism_body_t);
 
-    /* single frame allocator size */
-    u32 frame_allocator_size;
-} prism_world_config_t;
+    if(!body)
+    {
+        PRISM_DEBUG_MSG("[ALLOCATION ERROR]: Unable to allocate prism_body_t.\n");
+        return NULL;
+    }  
 
-PRISM_API prism_world_config_t* prism_world_config_create(const vec3f* gravity);
+    memset(body, 0, sizeof(prism_body_t));
 
-#ifdef __cplusplus
+    body->body_type = type;
+    return body;
 }
-#endif
 
-#endif
+void prism_body_set_sleeping(prism_body_t* body, bool state)
+{
+    if(!body)
+        return;
+    
+    body->is_sleeping = state;
+}
+
+
+void prism_body_allow_sleeping(prism_body_t* body, bool state)
+{
+    if(!body)
+        return;
+
+    body->enable_sleeping = state;
+}
+

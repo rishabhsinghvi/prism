@@ -30,7 +30,6 @@
 #include "math/prism_math.h"
 #include "allocators/prism_base_allocator.h"
 
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -45,10 +44,37 @@ typedef enum
 typedef struct 
 {
     prism_body_type body_type;
-    bool is_sleeping;
+
+    transform_t transform;
     
+    mat33 inv_inertia_model;
+    mat33 inv_inertia_world;
+    
+    vec3f linear_vel;
+    vec3f ang_vel;
+    vec3f force;
+    vec3f torque;
+
+    vec3f local_center;
+    vec3f world_center;
+
+    f64 mass;
+    f64 invmass;
+
+    f64 lin_damping;
+    f64 ang_damping;
+
+    void* user_data;
+
+    bool enable_sleeping;
+    bool is_sleeping;
 } prism_body_t;
 
+
+PRISM_API prism_body_t* prism_body_create(prism_body_type type, prism_base_allocator_t* allocator);
+
+PRISM_API void prism_body_set_sleeping(prism_body_t* body, bool state);
+PRISM_API void prism_body_allow_sleeping(prism_body_t* body, bool state);
 
 
 #ifdef __cplusplus

@@ -26,6 +26,13 @@
 #define PRISM_WORLD_H
 
 #include "prism_common.h"
+#include "math/prism_math.h"
+#include "shapes/prism_shapes.h"
+#include "constraints/prism_joint.h"
+#include "body/prism_body.h"
+#include "body/prism_island.h"
+#include "allocators/prism_frame_allocator.h"
+#include "prism_world_config.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -33,12 +40,23 @@ extern "C" {
 
 typedef struct 
 {
+    f64 default_timestep;
     
+    vec3f gravity;
+
+    prism_body_t** body_list;
+    u32 body_count;
+    
+    u32 iterations;
+
+    prism_frame_allocator_t* frame_allocator;
 } prism_world_t;
 
+PRISM_API prism_world_t* prism_world_create(prism_base_allocator_t* allocator);
+PRISM_API prism_world_t* prism_world_create_from_config(const prism_world_config_t* config);
 
-
-
+PRISM_API void prism_world_simulate_fixed_timestep(prism_world_t* world);
+PRISM_API void prism_world_simulate(prism_world_t* world, f64 timestep);
 
 
 #ifdef __cplusplus

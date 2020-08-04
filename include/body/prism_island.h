@@ -22,25 +22,26 @@
 * SOFTWARE.
 */
 
-#include "prism_world_config.h"
-#include "allocators/prism_allocator.h"
+#ifndef PRISM_ISLAND_H
+#define PRISM_ISLAND_H
 
-#define PRISM_DEFAULT_LINEAR_ALLOCATOR_SIZE 1024 * 1024
-#define PRISM_DEFAULT_FRAME_ALLOCATOR_SIZE 1024
+#include "prism_common.h"
+#include "allocators/prism_base_allocator.h"
+#include "body/prism_body.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-prism_world_config_t* prism_world_config_create(const vec3f* gravity)
-{
-    prism_world_config_t* config = (prism_world_config_t*)PRISM_ALLOC(sizeof(prism_world_config_t));
+typedef struct prism_island_t prism_island_t;
 
-    if(!config)
-    {
-        PRISM_DEBUG_MSG("[ALLOCATION ERROR]: Unable to allocate prism_world_config_t.\n");
-    }
+PRISM_API prism_island_t* prism_island_create(u32 body_capacity, u32 constraint_capacity, prism_base_allocator_t* allocator);
+PRISM_API void prism_island_insert_body(prism_island_t* island, prism_body_t* body);
 
-    config->gravity = *gravity;
-    config->linear_allocator_size = PRISM_DEFAULT_LINEAR_ALLOCATOR_SIZE;
-    config->frame_allocator_size = PRISM_DEFAULT_FRAME_ALLOCATOR_SIZE;
+PRISM_API bool prism_check_if_island_sleeping(prism_island_t* island);
 
-    return config;
+#ifdef __cplusplus
 }
+#endif
+
+#endif

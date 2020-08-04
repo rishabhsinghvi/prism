@@ -29,5 +29,6 @@
 #include "prism_vec3f.h"
 #include "prism_quaternion.h"
 #include "prism_mat33.h"
+#include "prism_transform.h"
 
 #endif
