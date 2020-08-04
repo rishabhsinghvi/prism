@@ -74,4 +74,13 @@ void prism_world_simulate(prism_world_t* world, f64 timestep)
     if(!world)
         return;
 
+    /* Create island */
+
+    prism_island_t* island = prism_island_create(world->body_count, 0, (prism_base_allocator_t*)world->frame_allocator);
+    
+    for(size_t i = 0; i < world->body_count; i++)
+    {
+        
+    }
+
 }

@@ -22,61 +22,35 @@
 * SOFTWARE.
 */
 
-
-#ifndef PRISM_BODY_H
-#define PRISM_BODY_H
+#ifndef PRISM_MATERIAL_H
+#define PRISM_MATERIAL_H
 
 #include "prism_common.h"
-#include "math/prism_math.h"
-#include "allocators/prism_base_allocator.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+/* Describes how the friction and bounciness of two colliding bodies are combined 
+ * In case of two colliding materials having different combine strategies,
+ * priority is given in order: AVG < MIN < MULT < MAX
+ */
 typedef enum
 {
-    BODY_TYPE_DYNAMIC,
-    BODY_TYPE_STATIC,
-    BODY_TYPE_KINEMATIC
-} prism_body_type;
+    COMBINE_AVERAGE = 0,
+    COMBINE_MINIMUM,
+    COMBINE_MULTIPLY,
+    COMBINE_MAXIMUM,
+} combine_strategy;
 
-typedef struct 
+typedef struct
 {
-    prism_body_type body_type;
-
-    transform_t transform;
-    
-    mat33 inv_inertia_model;
-    mat33 inv_inertia_world;
-    
-    vec3f linear_vel;
-    vec3f ang_vel;
-    vec3f force;
-    vec3f torque;
-
-    vec3f local_center;
-    vec3f world_center;
-
-    f64 mass;
-    f64 invmass;
-
-    f64 lin_damping;
-    f64 ang_damping;
-
-    void* user_data;
-
-    bool in_island;
-    bool enable_sleeping;
-    bool is_sleeping;
-} prism_body_t;
-
-
-PRISM_API prism_body_t* prism_body_create(prism_body_type type, prism_base_allocator_t* allocator);
-
-PRISM_API void prism_body_set_sleeping(prism_body_t* body, bool state);
-PRISM_API void prism_body_allow_sleeping(prism_body_t* body, bool state);
-
+    f64 dynamic_friction;
+    f64 static_friction;
+    f64 bounciness;
+    combine_strategy friction_combine_strategy;
+    combine_strategy bounciness_combine_strategy;
+} prism_material_t;
 
 #ifdef __cplusplus
 }

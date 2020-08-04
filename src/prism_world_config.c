@@ -22,64 +22,6 @@
 * SOFTWARE.
 */
 
+#include "prism_world_config.h"
+#include "allocators/prism_allocator.h"
 
-#ifndef PRISM_BODY_H
-#define PRISM_BODY_H
-
-#include "prism_common.h"
-#include "math/prism_math.h"
-#include "allocators/prism_base_allocator.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-typedef enum
-{
-    BODY_TYPE_DYNAMIC,
-    BODY_TYPE_STATIC,
-    BODY_TYPE_KINEMATIC
-} prism_body_type;
-
-typedef struct 
-{
-    prism_body_type body_type;
-
-    transform_t transform;
-    
-    mat33 inv_inertia_model;
-    mat33 inv_inertia_world;
-    
-    vec3f linear_vel;
-    vec3f ang_vel;
-    vec3f force;
-    vec3f torque;
-
-    vec3f local_center;
-    vec3f world_center;
-
-    f64 mass;
-    f64 invmass;
-
-    f64 lin_damping;
-    f64 ang_damping;
-
-    void* user_data;
-
-    bool in_island;
-    bool enable_sleeping;
-    bool is_sleeping;
-} prism_body_t;
-
-
-PRISM_API prism_body_t* prism_body_create(prism_body_type type, prism_base_allocator_t* allocator);
-
-PRISM_API void prism_body_set_sleeping(prism_body_t* body, bool state);
-PRISM_API void prism_body_allow_sleeping(prism_body_t* body, bool state);
-
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif
